@@ -1,22 +1,36 @@
-.SortingVisualizer {
-  padding: 20px;
+.btn.random{
+  /* have to set background image */
+  background-image: url('/path/to/icon.svg');
 }
 
-.slider-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin: 20px 0;
+.btn.play {
+  /* have to set background image */
+  background-image: url('/path/to/icon.svg');
 }
 
-.slider-container label {
-  font-size: 16px;
-  font-weight: 500;
+.btn.pause {
+  /* have to set background image */
+  background-image: url('/path/to/icon.svg');
 }
 
-.slider-container input[type="range"] {
-  width: 300px;
-  height: 6px;
-  cursor: pointer;
+.btn.stop{
+  /* have to set background image */
+  background-image: url('/path/to/icon.svg');
 }
+
+.btn.bubble {
+  /* have to set background image */
+  background-image: url('/path/to/icon.svg');
+  position: absolute;
+  right: 20px;
+  top: 80px;
+}
+
+.btn.merge {
+  /* have to set background image */
+  background-image: url('/path/to/icon.svg');
+  position: absolute;
+  right: 20px;
+  top: 130px;
+}
+
