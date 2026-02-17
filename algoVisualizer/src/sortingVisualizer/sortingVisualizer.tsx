@@ -3,7 +3,7 @@ import "./SortingVisualizer.css";
 
 const SortingVisualizerLogic = () => {
   //notes: this is my programming diary | all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
-
+ 
   //# Visualizer Logic is here 
   
   //* initializing empty array for random array generator
@@ -21,25 +21,25 @@ const SortingVisualizerLogic = () => {
     setArraySize(event.target.value);
   };
 
-  //todo: array mapper to have styles on numbers | not yet working | planning to make it on another file
-  // const arrayBars = array.map((value, index) => (
-  //     <div
-  //       key={index}
-  //       className="arrayBar"
-  //       style={{ height: `${value * 3}px` }}
-  //     >
-  //       <span>{value}</span>
-  //       <span className="indexLabel">{index}</span>
-  //     </div>
-  //   ));
+  //* Array mapper to have bars on numbers with index
+  const arrayBars = array.map((value, index) => (
+      <div
+        key={index}
+        className='arrayBar'
+        style={{ height: `${value * 3}px` }} 
+      >
+        <span>{value}</span> 
+        <span className="indexLabel">{index}</span> 
+      </div>
+    ));
 
   //! There has to be logic that generates an array if size is changed, this is useEffect
 
-  //* Random array creator | numbers from 10 to 409
+  //* Random array creator | numbers from 15 to 414
   const generateNewArray = () => {
     const newArray = [];
     for (let i = 0; i < arraySize; i++) {
-      const randomValue = Math.floor(Math.random() * 400) + 10;
+      const randomValue = Math.floor(Math.random() * 100) + 15;
       newArray.push(randomValue);
     }
     setArray(newArray);
@@ -49,10 +49,10 @@ const SortingVisualizerLogic = () => {
     <div className="SortingVisualizer">
       {/* //# Visual UI is here*/}
 
-      {/* //study this array container*/}
-      {/* <div className = 'arrayContainer'>
+      {/* //* calls the arrayBars function and gives classname | planning to move this to the bottom of buttons*/}
+      <div className = 'arrayContainer'>
         {arrayBars}
-      </div> */}
+      </div>
 
       {/* //* buttons */}
       <h1>Sorting Visualizer</h1>
@@ -88,7 +88,7 @@ const SortingVisualizerLogic = () => {
           <input 
             type = 'range'
             min = '4'
-            max = '100'
+            max = '50'
             value = {arraySize} 
             onChange={handleArraySize}
           />
