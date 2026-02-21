@@ -1,4 +1,5 @@
 //# bubble sort algorithm
+//study
 
 function bubbleSort(inputArray: number[]): number[] {
   //* Clones the input array to avoid mutating the original

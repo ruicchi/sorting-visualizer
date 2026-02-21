@@ -1,6 +1,7 @@
 import React, { useState } from "react"; //todo add useEffect later
 import "./SortingVisualizer.css";
 import bubbleSort from './BubbleSortLogic';
+import mergeSort from './MergeSortLogic';
 
 const SortingVisualizerLogic = () => {
   //notes: this is my programming diary | all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
@@ -63,7 +64,7 @@ const SortingVisualizerLogic = () => {
         sortedArray = bubbleSort(array);
         break;
       case 'merge':
-        // sortedArray = mergeSort(array); //! placeholder
+        sortedArray = mergeSort(array);
         break;
       default:
         sortedArray = bubbleSort(array);
@@ -81,8 +82,10 @@ const SortingVisualizerLogic = () => {
         {arrayBars}
       </div>
 
-      {/* //* buttons */}
       <h1>Sorting Visualizer</h1>
+      <p>Algorithm: {selectedAlgorithm}</p>
+
+        {/* //* buttons */}
         <button className='btn random' onClick={generateNewArray}>randomize</button>
         <button className='btn play' onClick={handlePlay}>play</button>
         <button className='btn pause'>pause</button>
@@ -125,7 +128,7 @@ const SortingVisualizerLogic = () => {
           <input 
             type = 'range'
             min = '4'
-            max = '50'
+            max = '30'
             value = {arraySize} 
             onChange={handleArraySize}
           />
