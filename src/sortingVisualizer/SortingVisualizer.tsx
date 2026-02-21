@@ -1,4 +1,4 @@
-import React, { useState } from "react"; //todo add useEffect later
+import React, { useState, useEffect } from "react"; //todo add useEffect later
 import "./SortingVisualizer.css";
 import bubbleSort from './BubbleSortLogic';
 import mergeSort from './MergeSortLogic';
@@ -7,13 +7,13 @@ const SortingVisualizerLogic = () => {
   //notes: this is my programming diary | all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
  
   //# Visualizer Logic is here 
-  
+
   //* initializing empty array for random array generator
   const [array, setArray] = useState([]);
 
   //* State for progress speed and animation speed, using percentage for easier understanding
   const [progressSpeed, setProgressSpeed] = useState(50);
-  const [arraySize, setArraySize] = useState(20);
+  const [arraySize, setArraySize] = useState(15);
 
   //* State to track which algorithm is selected
   const [selectedAlgorithm, setSelectedAlgorithm] = useState('bubble');
@@ -54,6 +54,11 @@ const SortingVisualizerLogic = () => {
     }
     setArray(newArray);
   };
+  
+  //* listener for arraysizes
+  useEffect(() => {
+    generateNewArray();
+  }, [arraySize]);
 
   //* Play button handler
   const handlePlay = () => {
@@ -77,7 +82,7 @@ const SortingVisualizerLogic = () => {
     <div className="SortingVisualizer">
       {/* //# Visual UI is here*/}
 
-      {/* //* calls the arrayBars function and gives classname | planning to move this to the bottom of buttons*/}
+      {/* //* calls the arrayBars function and gives classname*/}
       <div className = 'arrayContainer'>
         {arrayBars}
       </div>
