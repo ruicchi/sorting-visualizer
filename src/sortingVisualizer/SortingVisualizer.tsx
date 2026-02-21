@@ -54,7 +54,7 @@ const SortingVisualizerLogic = () => {
     }
     setArray(newArray);
   };
-  
+
   //* listener for arraysizes
   useEffect(() => {
     generateNewArray();

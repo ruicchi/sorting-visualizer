@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Todo files
-*.todo
+todo/*
