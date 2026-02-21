@@ -1,5 +1,6 @@
 import React, { useState } from "react"; //todo add useEffect later
 import "./SortingVisualizer.css";
+import bubbleSort from './BubbleSortLogic';
 
 const SortingVisualizerLogic = () => {
   //notes: this is my programming diary | all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
@@ -45,6 +46,12 @@ const SortingVisualizerLogic = () => {
     setArray(newArray);
   };
 
+  //* Play button handler - triggers bubble sort
+  const handlePlay = () => {
+    const sortedArray = bubbleSort(array);
+    setArray(sortedArray);
+  };
+
   return (
     <div className="SortingVisualizer">
       {/* //# Visual UI is here*/}
@@ -57,7 +64,7 @@ const SortingVisualizerLogic = () => {
       {/* //* buttons */}
       <h1>Sorting Visualizer</h1>
         <button className='btn random' onClick={generateNewArray}>randomize</button>
-        <button className='btn play'>play</button>
+        <button className='btn play' onClick={handlePlay}>play</button>
         <button className='btn pause'>pause</button>
         <button className='btn stop'>stop</button>
         <button className='btn seekLeft'>seek left</button>

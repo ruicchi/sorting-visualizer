@@ -4,7 +4,6 @@
 		{
 			"type": "npm",
 			"script": "dev",
-			"path": "algoVisualizer",
 			"problemMatcher": [],
 			"label": "npm: dev - algoVisualizer",
 			"detail": "vite",
