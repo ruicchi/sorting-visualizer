@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./SortingVisualizer.css";
-import bubbleSort from './BubbleSortLogic';
-import mergeSort from './MergeSortLogic';
+// import bubbleSort from './BubbleSortLogic';
+import handleBubbleSortClick from "./BubbleSortHandler";
+// import mergeSort from './MergeSortLogic';
 
 const SortingVisualizerLogic = () => {
   //notes: this is my programming diary | all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
@@ -15,8 +16,33 @@ const SortingVisualizerLogic = () => {
   const [progressSpeed, setProgressSpeed] = useState(50);
   const [arraySize, setArraySize] = useState(15);
 
+  //* Animation states
+  const [steps, setSteps] = useState([]); //^ where all sorting steps are
+  const [currentStepIndex, setCurrentStepIndex] = useState(0); //^ which step we're on
+  const [isPlaying, setIsPlaying] = useState(false); //^ is the animation playing?
+  const [comparingIndices, setComparingIndices] = useState([]); //^ which bars to highlight?
+  const [sortedIndices, setSortedIndices] = useState([]); //^ which bars are in final position
+
   //* State to track which algorithm is selected
   const [selectedAlgorithm, setSelectedAlgorithm] = useState('bubble');
+
+  //* handler for play
+  const handlePlayClick = () => {
+    setIsPlaying(true);
+  };
+
+  //* handler for pause
+  const handlePauseClick = () => {
+    setIsPlaying(false);
+  };
+
+  //* handler for reset
+  const handleResetClick = () => {
+    setCurrentStepIndex(0);
+    setIsPlaying(false);
+    setComparingIndices([]);
+    setSortedIndices([]);
+  };
 
   //* Algorithm selector handler
     const handleAlgorithmSelect = (algorithm) => {
@@ -43,8 +69,6 @@ const SortingVisualizerLogic = () => {
       </div>
     ));
 
-  //! There has to be logic that generates an array if size is changed, this is useEffect
-
   //* Random array creator | numbers from 15 to 414
   const generateNewArray = () => {
     const newArray = [];
@@ -66,7 +90,7 @@ const SortingVisualizerLogic = () => {
 
     switch(selectedAlgorithm) {
       case 'bubble':
-        sortedArray = bubbleSort(array);
+        sortedArray = handleBubbleSortClick(array); //to be changed to a new handler
         break;
       case 'merge':
         sortedArray = mergeSort(array);
