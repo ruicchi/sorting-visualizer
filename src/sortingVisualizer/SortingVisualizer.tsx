@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./SortingVisualizer.css";
-import generateBubbleSortSteps from "./BubbleSortLogic";
-import generateMergeSortSteps from "./MergeSortLogic";
+import generateBubbleSortSteps from "../algorithms/bubbleSort";
+import generateMergeSortSteps from "../algorithms/mergeSort";
 
 const SortingVisualizerLogic = () => {
   //notes: all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
