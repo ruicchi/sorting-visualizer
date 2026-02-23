@@ -2,7 +2,6 @@
 //! to be finalized, merge sort should store unchosen elements of array | update visualizer also
 //study
 
-
 function generateMergeSortSteps(inputArray: number[]): Step[] {
   const steps: Step[] = [];
   const array = [...inputArray];
@@ -12,7 +11,8 @@ function generateMergeSortSteps(inputArray: number[]): Step[] {
     array: [...array],
     comparingIndices: [],
     swappingIndices: [],
-    sortedIndices: []
+    sortedIndices: [],
+    activeIndices: []
   });
 
   mergeSort(array, 0, array.length - 1, steps);
@@ -22,7 +22,8 @@ function generateMergeSortSteps(inputArray: number[]): Step[] {
     array: [...array],
     comparingIndices: [],
     swappingIndices: [],
-    sortedIndices: Array.from({ length: array.length }, (_, i) => i)
+    sortedIndices: Array.from({ length: array.length }, (_, i) => i),
+    activeIndices: []
   });
   
   return steps;
@@ -35,18 +36,6 @@ function mergeSort(array: number[], left: number, right: number, steps: Step[]):
 
   const middle = Math.floor((left + right) / 2);
   
-  //* Divide: Show the split
-  const divideIndices = [];
-  for (let i = left; i <= right; i++) {
-    divideIndices.push(i);
-  }
-  steps.push({
-    array: [...array],
-    comparingIndices: divideIndices,
-    swappingIndices: [],
-    sortedIndices: []
-  });
-
   //* Recursively sort left and right halves
   mergeSort(array, left, middle, steps);
   mergeSort(array, middle + 1, right, steps);
@@ -56,6 +45,19 @@ function mergeSort(array: number[], left: number, right: number, steps: Step[]):
 }
 
 function merge(array: number[], left: number, middle: number, right: number, steps: Step[]): void {
+  //* Show the active subarray being merged
+  const activeIndices = [];
+  for (let idx = left; idx <= right; idx++) {
+    activeIndices.push(idx);
+  }
+  steps.push({
+    array: [...array],
+    comparingIndices: [],
+    swappingIndices: [],
+    sortedIndices: [],
+    activeIndices: activeIndices
+  });
+
   //* Create copies of the subarrays
   const leftArray = [];
   const rightArray = [];
@@ -78,24 +80,37 @@ function merge(array: number[], left: number, middle: number, right: number, ste
       array: [...array],
       comparingIndices: [left + i, middle + 1 + j],
       swappingIndices: [],
-      sortedIndices: []
+      sortedIndices: [],
+      activeIndices: activeIndices
     });
 
     if (leftArray[i] <= rightArray[j]) {
       array[k] = leftArray[i];
+      
+      //* Show the element being placed in merged position
+      steps.push({
+        array: [...array],
+        comparingIndices: [],
+        swappingIndices: [k],
+        sortedIndices: [],
+        activeIndices: activeIndices
+      });
+      
       i++;
     } else {
       array[k] = rightArray[j];
+      
+      //* Show the element being placed in merged position
+      steps.push({
+        array: [...array],
+        comparingIndices: [],
+        swappingIndices: [k],
+        sortedIndices: [],
+        activeIndices: activeIndices
+      });
+      
       j++;
     }
-    
-    //* Show the element being placed in merged position
-    steps.push({
-      array: [...array],
-      comparingIndices: [],
-      swappingIndices: [k],
-      sortedIndices: []
-    });
     
     k++;
   }
@@ -107,7 +122,8 @@ function merge(array: number[], left: number, middle: number, right: number, ste
       array: [...array],
       comparingIndices: [],
       swappingIndices: [k],
-      sortedIndices: []
+      sortedIndices: [],
+      activeIndices: activeIndices
     });
     i++;
     k++;
@@ -120,23 +136,12 @@ function merge(array: number[], left: number, middle: number, right: number, ste
       array: [...array],
       comparingIndices: [],
       swappingIndices: [k],
-      sortedIndices: []
+      sortedIndices: [],
+      activeIndices: activeIndices
     });
     j++;
     k++;
   }
-  
-  //* Show the merged section
-  const mergedIndices = [];
-  for (let i = left; i <= right; i++) {
-    mergedIndices.push(i);
-  }
-  steps.push({
-    array: [...array],
-    comparingIndices: [],
-    swappingIndices: mergedIndices,
-    sortedIndices: []
-  });
 }
 
 export default generateMergeSortSteps;
