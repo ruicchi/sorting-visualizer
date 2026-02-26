@@ -32,6 +32,7 @@ const SortingVisualizerLogic = () => {
     setComparingIndices, //study
     play,
     pause,
+    handlePlayPause,
     reset,
     randomize,
     seekLeft,
@@ -48,52 +49,62 @@ const SortingVisualizerLogic = () => {
       array
     )
 
+  //* object for display names
+  const algorithmNames = {
+    bubble: "Bubble Sort",
+    merge: "Merge Sort",
+    quick: "Quick Sort",
+    selection: "Selection Sort",
+    heap: "Heap Sort"
+  };
+
+  //* mapper for display names
+  const displayName = algorithmNames[selectedAlgorithm] || selectedAlgorithm;
+
   return (
     <div className="SortingVisualizer">
       {/* //# Visual UI is here*/}
 
       {/* //* calls the arrayBars function and gives classname*/}
-      <div className = 'arrayRelative'>
         <div className = 'arrayContainer'>
           {arrayBars}
         </div>
 
         <div className="sortingButtons">
-            <button 
-              className={`btn bubble`}
-              onClick={() => handleSortTypeClick('bubble', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
-            >
-              Bubble Sort
-            </button>
-            <button 
-              className={`btn merge`}
-              onClick={() => handleSortTypeClick('merge', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
-            >
-              Merge Sort
-            </button>
-            <button 
-              className={`btn quick`}
-              onClick={() => handleSortTypeClick('quick', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
-            >
-              Quick Sort
-            </button>
-            <button 
-              className={`btn selection`}
-              onClick={() => handleSortTypeClick('selection', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
-            >
-              Selection Sort
-            </button>
-            <button 
-              className={`btn heap`}
-              onClick={() => handleSortTypeClick('heap', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
-            >
-              Heap Sort
-            </button>
-          </div>
-      </div>
-      
+          <button
+            className={`btn bubble`}
+            onClick={() => handleSortTypeClick('bubble', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+          >
+            Bubble Sort
+          </button>
+          <button 
+            className={`btn merge`}
+            onClick={() => handleSortTypeClick('merge', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+          >
+            Merge Sort
+          </button>
+          <button 
+            className={`btn quick`}
+            onClick={() => handleSortTypeClick('quick', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+          >
+            Quick Sort
+          </button>
+          <button 
+            className={`btn selection`}
+            onClick={() => handleSortTypeClick('selection', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+          >
+            Selection Sort
+          </button>
+          <button 
+            className={`btn heap`}
+            onClick={() => handleSortTypeClick('heap', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+          >
+            Heap Sort
+          </button>
+        </div>
+
       <h1>Sorting Visualizer</h1>
-      <p>Algorithm: {selectedAlgorithm}</p>
+      <p>Algorithm: {displayName}</p>
 
         {/* //* buttons */}
         <div className="controlButtons">
@@ -103,8 +114,13 @@ const SortingVisualizerLogic = () => {
             disabled={currentStepIndex === 0 || steps.length === 0}
           >ᐸ</button>
           <button className='btn random' onClick={randomize}>↳↰</button>
-          <button className='btn play' onClick={play}>▶</button>
-          <button className='btn pause' onClick={pause}>❚❚</button>
+          <button
+            className={`btn playPause ${isPlaying ? 'pause' : 'play'}`}
+            onClick={handlePlayPause}
+            disabled={selectedAlgorithm === "Pick an algorithm!"}
+          >
+            {isPlaying ? "❚❚" : "▶"}
+          </button>
           <button className='btn stop' onClick={reset}>⟳</button>
           <button 
             className='btn seekRight'
@@ -119,21 +135,22 @@ const SortingVisualizerLogic = () => {
         {/* //* algorithm selector | vertical on right */}
 
       {/* //study slider for progress through steps */}
-      <div className='slider progress'>
-        <label>Progress: {currentStepIndex + 1} of {steps.length}</label>
-        <input
-          type='range'
-          min='0'
-          max={Math.max(0, steps.length - 1)}
-          value={currentStepIndex}
-          onChange={handleProgressChange}
-          disabled={steps.length === 0}
-        />
-      </div>
+      <div className='rangeSliders'>
+        <div className='slider progress'>
+          <label>Progress: {currentStepIndex + 1} of {steps.length}</label>
+          <input
+            type='range'
+            min='0'
+            max={Math.max(0, steps.length - 1)}
+            value={currentStepIndex}
+            onChange={handleProgressChange}
+            disabled={steps.length === 0}
+          />
+        </div>
 
         {/* //* slider for progress speed, planning to have thresholds or marks*/}
         <div className='slider progressSpeed'>
-          <label>Progress Speed: {progressSpeed}%</label>
+          <label>Speed: {progressSpeed}%</label>
           <input
             type = 'range' 
             min = '1'
@@ -145,7 +162,7 @@ const SortingVisualizerLogic = () => {
 
         {/* //* slider for array size*/}
         <div className='slider arraySize'>
-          <label>Array size: {arraySize}</label>
+          <label>Size: {arraySize}</label>
           <input 
             type = 'range'
             min = '4'
@@ -154,6 +171,7 @@ const SortingVisualizerLogic = () => {
             onChange={handleArraySize}
           />
         </div>
+      </div>
     </div>
   );
 };

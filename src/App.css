@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  min-height: 100vh;
 }
 
 h1 {
@@ -26,6 +25,7 @@ h1 {
   justify-content: center;
   gap: 8px;
   display: flex;
+  transition: background 0.2s ease-out, color 0.2s ease-out, transform 0.2s ease-out;
 }
 
 .btn:hover {
@@ -35,10 +35,4 @@ h1 {
     filter 0.2s ease-out,
     transform 0.2s ease-out;
   outline: none;
-}
-
-/* Optional: stronger effect for active/clicked state */
-.btn:active {
-  filter: brightness(0.95);
-  transform: scale(0.98);
 }

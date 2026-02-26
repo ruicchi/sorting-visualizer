@@ -63,6 +63,15 @@ export const useSortingAnimation = (
     setIsPlaying(false);
   };
 
+  const handlePlayPause = () => {
+  if (isPlaying) {
+    pause();
+  } else {
+    play();
+  }
+  setIsPlaying(!isPlaying);
+  };
+
   //*handler for reset
   const reset = () => {
     setCurrentStepIndex(0);
@@ -213,6 +222,7 @@ export const useSortingAnimation = (
     setComparingIndices,
     play,
     pause,
+    handlePlayPause,
     reset,
     seekLeft,
     seekRight,
