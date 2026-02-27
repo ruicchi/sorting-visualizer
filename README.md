@@ -1,7 +1,9 @@
 # Sorting Visualizer
 A project for visualizing sorting algorithms.
 
-# React + TypeScript + Vite
+![Demo](assets/demo.gif)
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
