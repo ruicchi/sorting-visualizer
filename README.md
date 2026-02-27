@@ -1,4 +1,4 @@
-# Algorithm Visualizer
+# Sorting Visualizer
 A project for visualizing data structures and algorithms.
 
 # React + TypeScript + Vite
