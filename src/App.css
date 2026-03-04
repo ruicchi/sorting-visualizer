@@ -8,12 +8,12 @@ h1 {
   padding-top: 1rem;
 }
 
-.btn{
+.btn {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .btn {
-  background: #1F1F1F;
+  background: #1f1f1f;
   color: white;
   border: none;
   border-radius: 12px;
@@ -25,13 +25,16 @@ h1 {
   justify-content: center;
   gap: 8px;
   display: flex;
-  transition: 0.2s ease-out, color 0.2s ease-out, transform 0.2s ease-out;
+  transition:
+    0.2s ease-out,
+    color 0.2s ease-out,
+    transform 0.2s ease-out;
 }
 
 .btn:hover {
-  background: #9F9F9F;
+  background: #9f9f9f;
   transform: translateY(-2px) scale(1.04);
-  transition: 
+  transition:
     filter 0.2s ease-out,
     transform 0.2s ease-out;
   outline: none;
